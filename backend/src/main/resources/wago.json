@@ -1,0 +1,407 @@
+{
+	"coils": [
+		{
+			"id": "fb5b1f61",
+			"name": "Hi Vac Valve 1 Open/Close",
+			"address": 0
+		},
+		{
+			"id": "3b0efaf7",
+			"name": "Hi Vac Valve 2 Open/Close",
+			"address": 1
+		},
+		{
+			"id": "7521becd",
+			"name": "Fast Roughing Valve",
+			"address": 2
+		},
+		{
+			"id": "0774bae6",
+			"name": "Slow Roughing Valve",
+			"address": 3
+		},
+		{
+			"id": "50ffa59a",
+			"name": "Gun 3 AR 100 SCCM Outlet",
+			"address": 4
+		},
+		{
+			"id": "0324c168",
+			"name": "Fast Vent Valve",
+			"address": 5
+		},
+		{
+			"id": "f90ed08c",
+			"name": "Slow Vent Valve",
+			"address": 6
+		},
+		{
+			"id": "ac013935",
+			"name": "Cryo 1 Rough Valve",
+			"address": 7
+		},
+		{
+			"id": "eb2c94c5",
+			"name": "Cryo 1 Purge Valve",
+			"address": 8
+		},
+		{
+			"id": "56bf97f4",
+			"name": "Full Range Gauge Isolation Valve",
+			"address": 9
+		},
+		{
+			"id": "f82c4692",
+			"name": "Baratron Gauge Isolation Valve",
+			"address": 10
+		},
+		{
+			"id": "3a231d4d",
+			"name": "Cryo 2 Rough Valve",
+			"address": 19
+		},
+		{
+			"id": "45dcff1e",
+			"name": "Cryo 2 Purge Valve",
+			"address": 20
+		},
+		{
+			"id": "7ff34e56",
+			"name": "Fulrange Gauge Degas On",
+			"address": 21
+		},
+		{
+			"id": "6e6bb066",
+			"name": "Cryo 1 Purge Heater On/Off",
+			"address": 22
+		},
+		{
+			"id": "ea1161c8",
+			"name": "Cryo 2 Purge Heater On/Off",
+			"address": 23
+		},
+		{
+			"id": "a6826c97",
+			"name": "DC Power Select Master",
+			"address": 24,
+			"description": "NC = GUN 1, 2 NO = GUN 3, 4"
+		},
+		{
+			"id": "b8c06b92",
+			"name": "RF Power Select Master",
+			"address": 25,
+			"description": "NC = GUN 1, 2 NO = GUN 3, 4"
+		},
+		{
+			"id": "7ff06f6c",
+			"name": "RF Power Select Slave 1",
+			"address": 26,
+			"description": "NC = GUN 1 NO = GUN 2"
+		},
+		{
+			"id": "ad2edd5e",
+			"name": "RF Power Select Slave 2",
+			"address": 27,
+			"description": "NC = GUN 3 NO = GUN 4"
+		},
+		{
+			"id": "e02b051a",
+			"name": "Gun 2 Shutter Run/Stop",
+			"address": 28
+		},
+		{
+			"id": "c0cd8743",
+			"name": "Gun 2 Shutter Cw Ccw ",
+			"address": 29
+		},
+		{
+			"id": "9bf8dbaf",
+			"name": "Gun 2 Shutter Int / Ext",
+			"address": 30
+		},
+		{
+			"id": "3b188e08",
+			"name": "Gun 2 Shutter Alarm Reset",
+			"address": 31
+		},
+		{
+			"id": "3c489fdb",
+			"name": "Gun 3 Shutter Run/Stop",
+			"address": 32
+		},
+		{
+			"id": "62b653b4",
+			"name": "Gun 3 Shutter Cw Ccw",
+			"address": 33
+		},
+		{
+			"id": "d55a5ae5",
+			"name": "Gun 3 Shutter Int/Ext",
+			"address": 34
+		},
+		{
+			"id": "5949547e",
+			"name": "Gun 3 Shutter Alarm Reset",
+			"address": 35
+		},
+		{
+			"id": "eb7809ac",
+			"name": "Compressor Cryo 1 Start",
+			"address": 36
+		},
+		{
+			"id": "2c6b0987",
+			"name": "Compressor Cryo 2 Start",
+			"address": 37
+		},
+		{
+			"id": "9048ba53",
+			"name": "DC Power Select Slave 1",
+			"address": 38,
+			"description": "NC = GUN 1 NO = GUN 2"
+		},
+		{
+			"id": "476bb956",
+			"name": "DC Power Select Slave 2",
+			"address": 39,
+			"description": "NC = GUN 3 NO = GUN 4"
+		},
+		{
+			"id": "39981d1a",
+			"name": "Gen 1 EPC Inlet",
+			"address": 48
+		},
+		{
+			"id": "b6a440c9",
+			"name": "Gen 2 O2 Outlet",
+			"address": 49
+		},
+		{
+			"id": "e8a719c5",
+			"name": "Gen 1 N2 Outlet",
+			"address": 50
+		},
+		{
+			"id": "b86359a2",
+			"name": "Gen 3 O2 Outlet",
+			"address": 51
+		},
+		{
+			"id": "2e8f30e1",
+			"name": "Gen 3 N2 Outlet",
+			"address": 52
+		},
+		{
+			"id": "07a016f2",
+			"name": "Gun 1 AR Outlet",
+			"address": 53
+		},
+		{
+			"id": "5bdbf909",
+			"name": "N2 MFC Select",
+			"address": 60
+		}
+	],
+	"discreteInputs": [
+		{
+			"id": "03ec1801",
+			"name": "Door Switch",
+			"address": 0
+		},
+		{
+			"id": "74983bbd",
+			"name": "ATM Switch",
+			"address": 1
+		},
+		{
+			"id": "ca95364f",
+			"name": "Water Leak Sensor",
+			"address": 3
+		},
+		{
+			"id": "553d91e5",
+			"name": "Hi Vac Valve 1 Open",
+			"address": 4
+		},
+		{
+			"id": "bc6c97c6",
+			"name": "Hi Vac Valve 1 Closed",
+			"address": 5
+		},
+		{
+			"id": "941d7b25",
+			"name": "Hi Vac Valve 2 Open",
+			"address": 6
+		},
+		{
+			"id": "be5ea032",
+			"name": "Hi Vac Valve 2 Closed",
+			"address": 7
+		},
+		{
+			"id": "e21614c8",
+			"name": "Gun 2 Shutter Open",
+			"address": 11
+		},
+		{
+			"id": "741207fc",
+			"name": "Gun 2 Shutter Close",
+			"address": 12
+		},
+		{
+			"id": "d3e1d453",
+			"name": "Gun 2 Shutter Alarm",
+			"address": 13
+		},
+		{
+			"id": "2645a1e5",
+			"name": "Gun 3 Shutter Open",
+			"address": 14
+		},
+		{
+			"id": "eccee29b",
+			"name": "Gun 3 Shutter Close",
+			"address": 15
+		},
+		{
+			"id": "88db489e",
+			"name": "Gun 3 Shutter Alarm",
+			"address": 16
+		},
+		{
+			"id": "400dc0f5",
+			"name": "Water Flow Switch Gun 1/1",
+			"address": 27
+		},
+		{
+			"id": "832b01a6",
+			"name": "Water Flow Switch Gun 1/2",
+			"address": 28
+		},
+		{
+			"id": "95f9a075",
+			"name": "Water Flow Switch Gun 1/3",
+			"address": 29
+		},
+		{
+			"id": "ea59a8dc",
+			"name": "Water Flow Switch Gun 1/4",
+			"address": 30
+		},
+		{
+			"id": "6f5ba862",
+			"name": "Water Flow Switch Gun 2/1",
+			"address": 31
+		},
+		{
+			"id": "cd33606c",
+			"name": "Water Flow Switch Gun 2/2",
+			"address": 32
+		},
+		{
+			"id": "c24eaa5f",
+			"name": "Water Flow Switch Gun 3/1",
+			"address": 33
+		},
+		{
+			"id": "28be89c7",
+			"name": "Water Flow Switch Gun 3/2",
+			"address": 34
+		},
+		{
+			"id": "e52ca9d2",
+			"name": "Water Flow Siwtch Gun 4_1",
+			"address": 35
+		},
+		{
+			"id": "53420d72",
+			"name": "Water Flow Switch Gun 4_2",
+			"address": 36
+		},
+		{
+			"id": "a9345007",
+			"name": "Compressor 1 Started",
+			"address": 48
+		},
+		{
+			"id": "ffcc9687",
+			"name": "DC Power Select Master",
+			"address": 49,
+			"description": "NC = GUN 1,2 NO = GUN 3, 4"
+		},
+		{
+			"id": "e42a93f5",
+			"name": "RF Power Select Master",
+			"address": 50,
+			"description": "NC = GUN 1,2 NO = GUN 3, 4"
+		},
+		{
+			"id": "afbf6bdb",
+			"name": "RF Power Select Slave 1",
+			"address": 51,
+			"description": "NC = GUN 1 NO = GUN 2"
+		},
+		{
+			"id": "0cfffa27",
+			"name": "RF Power Select Slave 2",
+			"address": 52,
+			"description": "NC = GUN 3 NO = GUN 4"
+		},
+		{
+			"id": "e57341a6",
+			"name": "DC Power Select Slave 1",
+			"address": 53,
+			"description": "NC = GUN 1 NO = GUN 2"
+		},
+		{
+			"id": "7fee769c",
+			"name": "DC Power Select Slave 2",
+			"address": 54,
+			"description": "NC = GUN 3 NO = GUN 4"
+		}
+	],
+	"holdingRegisters": [
+		{
+			"id": "fa1703da",
+			"name": "MFC 1 Ar 50 SCCM",
+			"address": 0
+		},
+		{
+			"id": "ee7ea04d",
+			"name": "EPC He Output",
+			"address": 1
+		}
+	],
+	"inputRegisters": [
+		{
+			"id": "483df4d9",
+			"name": "Full Range Gauge",
+			"address": 0
+		},
+		{
+			"id": "34898810",
+			"name": "Cryo 1 Temp",
+			"address": 1
+		},
+		{
+			"id": "e7c88680",
+			"name": "Cryo 2 Temp",
+			"address": 2
+		},
+		{
+			"id": "9174045e",
+			"name": "MFC 1 Ar 100 SCCM",
+			"address": 3
+		},
+		{
+			"id": "39cc79c2",
+			"name": "EPC He Pressure",
+			"address": 4
+		},
+		{
+			"id": "1b1cdd8f",
+			"name": "EPC He Flow",
+			"address": 5
+		}
+	]
+}
