@@ -1,0 +1,19 @@
+<div *ngIf="messages.length != 0" class="ui-g ui-widget">
+  <div class="ui-g-12 ui-md-12 ui-widget ui-widget-header">
+    <h3>Errors</h3>
+  </div>
+  <div class="ui-g-12 ui-md-12 ui-widget ui-widget-content">
+    <div class="ui-g ui-g-12 ui-md-12 ui-widget-content" *ngFor="let message of messages;">
+      <div class="ui-g-8">
+        <i class="fa fa-times" style="color:red"></i>
+        {{message.text}}
+      </div>
+      <div class="ui-g-2">
+        {{message.time | date: 'yyyy-MM-dd HH:mm:ss'}}
+      </div>
+      <div class="ui-g-2">
+        <p-button label="Acknowledege" icon="fa fa-check" (onClick)="acknowledgeMessage(message)"></p-button>
+      </div>
+    </div>
+  </div>
+</div>

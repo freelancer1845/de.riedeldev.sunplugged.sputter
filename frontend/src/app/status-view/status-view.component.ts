@@ -1,24 +1,29 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import * as Stomp from 'stompjs';
-import * as SockJs from 'sockjs-client';
-import { Observable } from 'rxjs';
-import { SocketServiceService } from '../services/socket-service.service';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { GlobalState } from '../model/globalState';
 import { WagoIOState } from '../model/wagoIOState';
+import { StatusService } from '../services/status.service';
+import { StompService } from '@stomp/ng2-stompjs';
+import { FooterErrorService } from '../footer/footer-error.service';
+import { Message } from '@stomp/stompjs';
+import 'rxjs/add/operator/map';
+import {Observable, Subscription} from 'rxjs';
+
 
 @Component({
   selector: 'app-status-view',
   templateUrl: './status-view.component.html',
   styleUrls: ['./status-view.component.css']
 })
-export class StatusViewComponent implements OnInit {
+export class StatusViewComponent implements OnInit,OnDestroy {
 
+  
   @ViewChild("wagoOn") wagoWorking: ElementRef;
   @ViewChild("evraConnected") evraConnected: ElementRef;
   @ViewChild('pinnacleOneConnected') pinnacleOneConnected: ElementRef;
   @ViewChild('pinnacleTwoConnected') pinnacleTwoConnected: ElementRef;
 
   private newGlobalState(state: GlobalState) {
+
     if (state.wagoConnectedState == false) {
       this.changeElementState(this.wagoWorking, 'Modbus Connection is not working!', false);
     } else {
@@ -51,12 +56,22 @@ export class StatusViewComponent implements OnInit {
       element.nativeElement.setAttribute('style', 'color:red');
     }
   }
-  constructor(private socket: SocketServiceService) { }
+  constructor(
+    private stomp: StompService,
+    private errorService: FooterErrorService,
+    private statusService: StatusService
+  ) { }
+
+
+  private globalSubscription: Subscription;
 
   ngOnInit() {
-    setTimeout(() => {
-      this.socket.getObservable<GlobalState>('/topic/global').subscribe((state) => this.newGlobalState(state));
-    }, 2000);
+    this.globalSubscription = this.stomp.subscribe('/topic/global').map((message: Message) => <GlobalState>JSON.parse(message.body)).subscribe(state => this.newGlobalState(state));
+
+  }
+
+  ngOnDestroy(): void {
+    this.globalSubscription.unsubscribe();
   }
 
 }

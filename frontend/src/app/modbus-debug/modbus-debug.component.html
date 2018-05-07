@@ -1,5 +1,13 @@
-<div class="ui-g">
-  <p-accordion>
+<div class="ui-g ui-widget">
+  <div *ngIf="displayWagoError" class="ui-g-12 ui-widget-content">
+    <i class="fa fa-times" style="color:red"></i>
+    No connection to wago.
+  </div>
+  <div *ngIf="displayWebsocketError" class="ui-g-12 ui-widget-content">
+    <i class="fa fa-times" style="color:red"></i>
+    No connection to websocket. Values are not synchronzied!
+  </div>
+  <p-accordion *ngIf="displayWagoError === false">
     <p-accordionTab header="Digital Outputs">
       <div class="ui-g">
         <div *ngFor="let coil of coils" class="modbustable ui-g ui-g-12 ui-md-6">

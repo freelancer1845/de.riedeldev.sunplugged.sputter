@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  server_api: 'http://localhost:8080/api/'
+  server_api: 'http://localhost:8080/api/',
+  server_ws: 'ws://localhost:8080/socket'
 };

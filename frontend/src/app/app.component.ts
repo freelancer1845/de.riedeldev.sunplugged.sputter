@@ -21,6 +21,5 @@ export class AppComponent {
             {label: 'Support', icon: 'fa-support'},
             {label: 'Social', icon: 'fa-twitter'}
         ];
-        console.log("init");
     }
 }
