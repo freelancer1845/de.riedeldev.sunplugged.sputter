@@ -18,7 +18,7 @@ import { StatusService } from '../services/status.service';
 export class ModbusDebugComponent implements OnInit, OnDestroy {
 
 
-
+  showProgressSpinner = true;
 
   coils: DigitalModbus[] = [];
   discreteInputs: DigitalModbus[] = [];
@@ -29,7 +29,6 @@ export class ModbusDebugComponent implements OnInit, OnDestroy {
 
   private globalStateSubscription: Subscription;
   private stompStateSubscription: Subscription;
-  private httpStateSubscription: Subscription;
   private wagoSubscription: Subscription;
 
   displayWagoError: boolean;
@@ -64,7 +63,12 @@ export class ModbusDebugComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.modbusService.getCoils().subscribe(coils => this.coils = coils);
+    this.modbusService.getCoils().subscribe(coils => {
+      this.coils = coils;
+      if (this.showProgressSpinner === true) {
+        this.showProgressSpinner = false;
+      }
+    });
     this.modbusService.getDiscreteInputs().subscribe(discreteInputs => this.discreteInputs = discreteInputs);
     this.modbusService.getHoldingRegisters().subscribe(holdingRegisters => this.holdingRegisters = holdingRegisters);
     this.modbusService.getInputRegisters().subscribe(inputRegisters => this.inputRegisters = inputRegisters);
@@ -73,31 +77,36 @@ export class ModbusDebugComponent implements OnInit, OnDestroy {
       .map((message: Message) => <GlobalState>JSON.parse(message.body))
       .subscribe(this.newGlobalState);
     this.stompStateSubscription = this.socket.state.subscribe(state => this.displayWebsocketError = state !== StompState.CONNECTED);
-    this.httpStateSubscription = this.statusService.subscribeToStatusChecker(state => this.displayWagoError = !state);
     this.wagoSubscription = this.socket.subscribe('/topic/wagoIO').map((message: Message) => <WagoIOState> JSON.parse(message.body)).subscribe(this.newWagoIOState);
   }
 
   ngOnDestroy(): void {
     this.globalStateSubscription.unsubscribe();
     this.stompStateSubscription.unsubscribe();
-    this.httpStateSubscription.unsubscribe();
     this.wagoSubscription.unsubscribe();
   }
 
 
   newWagoIOState = (state: WagoIOState) => {
-    this.coils.forEach(coil => coil.state = state.coils.find(newCoil => coil.id == newCoil.id).state)
-    this.discreteInputs.forEach(input => input.state = state.discreteInputs.find(newInput => newInput.id == input.id).state);
-    if (this.updateHolingRegisters == true) {
-      this.holdingRegisters.forEach(reg => reg.value = state.holdingRegisters.find(reg2 => reg.id == reg2.id).value);
+    Object.assign(this.coils, state.coils);
+    Object.assign(this.discreteInputs, state.discreteInputs);
+    if (this.updateHolingRegisters === true) {
+      Object.assign(this.holdingRegisters, state.holdingRegisters);
     }
-    this.inputRegisters.forEach(reg => reg.value = state.inputRegisters.find(reg2 => reg.id == reg2.id).value);
+    Object.assign(this.inputRegisters, state.inputRegisters);
+    // this.coils.forEach(coil => coil.state = state.coils.find(newCoil => coil.id == newCoil.id).state)
+    // this.discreteInputs.forEach(input => input.state = state.discreteInputs.find(newInput => newInput.id == input.id).state);
+    // if (this.updateHolingRegisters == true) {
+    //   this.holdingRegisters.forEach(reg => reg.value = state.holdingRegisters.find(reg2 => reg.id == reg2.id).value);
+    // }
+    // this.inputRegisters.forEach(reg => reg.value = state.inputRegisters.find(reg2 => reg.id == reg2.id).value);
   }
 
   private newGlobalState = (state: GlobalState) => {
     if (state.wagoConnectedState == false) {
       this.displayWagoError = true;
     } else {
+      console.log('wago connected');
       this.displayWagoError = false;
     }
   }

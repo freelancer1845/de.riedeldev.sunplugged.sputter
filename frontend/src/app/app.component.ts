@@ -17,7 +17,7 @@ export class AppComponent {
         this.items = [
             {label: 'Status', icon: 'fa-bar-chart', routerLink: ['statusview']},
             {label: 'Modbus Debug', icon: 'fa-calendar', routerLink: ['modbusdebug']},
-            {label: 'Documentation', icon: 'fa-book'},
+            {label: 'Evara Debug', icon: 'fa-caret-square-right', routerLink: ['evaradebug']},
             {label: 'Support', icon: 'fa-support'},
             {label: 'Social', icon: 'fa-twitter'}
         ];

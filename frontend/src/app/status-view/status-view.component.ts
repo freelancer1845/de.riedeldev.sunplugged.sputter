@@ -16,14 +16,20 @@ import {Observable, Subscription} from 'rxjs';
 })
 export class StatusViewComponent implements OnInit,OnDestroy {
 
-  
+  showProgressSpinner = true;
+  state: GlobalState = new GlobalState();
+
   @ViewChild("wagoOn") wagoWorking: ElementRef;
   @ViewChild("evraConnected") evraConnected: ElementRef;
   @ViewChild('pinnacleOneConnected') pinnacleOneConnected: ElementRef;
   @ViewChild('pinnacleTwoConnected') pinnacleTwoConnected: ElementRef;
 
   private newGlobalState(state: GlobalState) {
-
+    if (this.showProgressSpinner === true) {
+      this.showProgressSpinner = false;
+    }
+    Object.assign(this.state, state);
+    /*
     if (state.wagoConnectedState == false) {
       this.changeElementState(this.wagoWorking, 'Modbus Connection is not working!', false);
     } else {
@@ -44,6 +50,7 @@ export class StatusViewComponent implements OnInit,OnDestroy {
     } else {
       this.changeElementState(this.pinnacleTwoConnected, 'Pinnacle Two connected!', true);
     }
+    */
 
   }
 

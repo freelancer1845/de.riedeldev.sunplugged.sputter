@@ -1,4 +1,11 @@
-<div class="ui-g ui-widget">
+
+<div class="ui-g ui-g-12 ui-widget" *ngIf="showProgressSpinner">
+    <div style="margin-left:auto;margin-right:auto">
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+  
+  </div>
+<div class="ui-g ui-widget" *ngIf="showProgressSpinner===false">
   <div *ngIf="displayWagoError" class="ui-g-12 ui-widget-content">
     <i class="fa fa-times" style="color:red"></i>
     No connection to wago.

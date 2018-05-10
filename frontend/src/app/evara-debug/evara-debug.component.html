@@ -1,0 +1,76 @@
+<div class="ui-g ui-widget">
+  <div class="ui-g-12 ui-widget-header">
+    Execute direct command.
+  </div>
+  <div class="ui-widget-content ui-g-12">
+    <div class="ui-g-12 ui-md-8">
+      <input type="text" pInputText [(ngModel)]="cmdText" style="width:100%" />
+    </div>
+    <div class="ui-g-12 ui-md-4">
+      <p-button label="Execute" (onClick)="executeCommand()"></p-button>
+    </div>
+    <div *ngIf="answer!=undefined" class="ui-g-12">
+      <p style="text-align: left; width:49%; display: inline-block;">Service Answer:</p>
+      <p style="text-align: right; width:50%;  display: inline-block;">{{answer}}</p>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-widget-header">
+    State
+  </div>
+  <div *ngIf="state.state!=standardStates.RUNNING" class="ui-widget-content ui-g-12">
+    Evara Pump is not connected.
+  </div>
+  <div *ngIf="state.state==standardStates.RUNNING" class="ui-widget-content ui-g-12">
+    <div class="ui-g-12 ui-md-6">
+      MP Running
+      <i *ngIf="state.mpRunning===false" class="fa fa-times" style="color:red;float:right"></i>
+      <i *ngIf="state.mpRunning===true" class="fa fa-check" style="color:green;float:right"></i>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      Normal Mode
+      <i *ngIf="state.normalMode===false" class="fa fa-times" style="color:red;float:right"></i>
+      <i *ngIf="state.normalMode===true" class="fa fa-check" style="color:green;float:right"></i>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      BP Running
+      <i *ngIf="state.bpRunning===false" class="fa fa-times" style="color:red;float:right"></i>
+      <i *ngIf="state.bpRunning===true" class="fa fa-check" style="color:green;float:right"></i>
+    </div>
+    <div class="ui-g-12 ui-md-6">
+      Power Saving Mode
+      <i *ngIf="state.powerSavingMode===false" class="fa fa-times" style="color:red;float:right"></i>
+      <i *ngIf="state.powerSavingMode===true" class="fa fa-check" style="color:green;float:right"></i>
+    </div>
+    <div *ngIf="state.warnings.length>0" class="ui-widget ui-g-12 ui-g-nopad">
+      <div class="ui-g-12 ui-widget-header">
+        Warnings
+      </div>
+      <div class="ui-g-12 ui-widget-content">
+        <ul>
+          <li *ngFor="let warning of state.warnings" style="color:rgb(185, 121, 0)">
+            {{warning.message}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div *ngIf="state.alarms.length>0" class="ui-widget ui-g-12 ui-g-nopad">
+      <div class="ui-g-12 ui-widget-header">
+        Alarms
+      </div>
+      <div class="ui-g-12 ui-widget-content">
+        <ul>
+          <li *ngFor="let alarm of state.alarms" style="color: rgb(187, 20, 20)">
+            {{alarm.message}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>

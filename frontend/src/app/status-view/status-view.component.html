@@ -1,26 +1,60 @@
+<div class="ui-g ui-g-12 ui-widget" *ngIf="showProgressSpinner">
+  <div style="margin-left:auto;margin-right:auto">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
 
+</div>
 
-<div class="ui-g ui-widget">
+<div *ngIf="showProgressSpinner==false" class="ui-g ui-widget">
   <div class="ui-g-12 ui-widget-header">
-     Modbus
+    Modbus
   </div>
   <div class="ui-g-12 ui-widget-content">
-    <span #wagoOn></span>
+    <p *ngIf="state.wagoConnectedState">
+      Wago Connected
+      <i class="fa fa-check check" ></i>
+    </p>
+    <p *ngIf="state.wagoConnectedState===false">
+      <i class="fa fa-times times"></i>
+      Wago not Connected!
+    </p>
   </div>
   <div class="ui-g-12 ui-widget-header">
-      Pinnacle
-   </div>
-   <div class="ui-g-12 ui-widget-content">
-      <span #pinnacleOneConnected></span>
-      <br>
-      <span #pinnacleTwoConnected></span>
-   </div>
-   <div class="ui-g-12 ui-widget-header">
-      Evara Pump
-   </div>
-   <div class="ui-g-12 ui-widget-content">
-      <span #evraConnected></span>
-   </div>
+    Pinnacle
+  </div>
+  <div class="ui-g-12 ui-widget-content">
+    <p *ngIf="state.pinnacleOneConnected">
+      <i class="fa fa-check check"></i>
+      Pinnacle One Connected
+    </p>
+    <p *ngIf="state.pinnacleOneConnected===false">
+        <i class="fa fa-times times"></i>
+        Pinnacle One not Connected!
+    </p>
+    <br>
+    <p *ngIf="state.pinnacleTwoConnected">
+        <i class="fa fa-check check"></i>
+        Pinnacle Two Connected
+      </p>
+      <p *ngIf="state.pinnacleTwoConnected===false">
+          <i class="fa fa-times times"></i>
+          Pinnacle Two not Connected!
+      </p>
+  </div>
+  <div class="ui-g-12 ui-widget-header">
+    Evara Pump
+  </div>
+  <div class="ui-g-12 ui-widget-content">
+    <p *ngIf="state.evraConnectedState">
+      <i class="fa fa-check check"></i>
+      Ebara Pump Connected
+    </p>
+    <p *ngIf="state.evraConnectedState===false">
+      <i class="fa fa-times times"></i>
+      Ebara Pump not Connected!
+    </p>
+    <span #evraConnected></span>
+  </div>
 
 
 </div>

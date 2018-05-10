@@ -1,20 +1,26 @@
 package de.riedeldev.sunplugged.sputter.backend.evra;
 
+import java.util.ArrayList;
+import java.util.List;
+import de.riedeldev.sunplugged.sputter.backend.utils.StandardStates;
 import lombok.Data;
 
 @Data
 public class EvraState {
 
-	private boolean mpRunning;
+  private StandardStates state;
 
-	private boolean bpRunning;
+  private boolean mpRunning;
 
-	private boolean normalMode;
+  private boolean bpRunning;
 
-	private boolean powerSavingMode;
+  private boolean normalMode;
 
-	private boolean[] warnings;
+  private boolean powerSavingMode;
 
-	private boolean[] alarms;
+  private final List<EvaraAlarm> alarms = new ArrayList<>();
+
+  private final List<EvaraWarning> warnings = new ArrayList<>();
+
 
 }

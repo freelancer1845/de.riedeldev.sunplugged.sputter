@@ -23,6 +23,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DataDistributerLoop extends AbstractStateLoop<StandardStates> {
 
+  private static final String TOPIC_WAGO_IO = "/topic/wagoIO";
+
+  private static final String TOPIC_CRYO = "/topic/cryo";
+
+  private static final String TOPIC_GLOBAL = "/topic/global";
+
+  private static final String TOPIC_EVARA = "/topic/evara";
+
   private final DataDistriubterConfiguration config;
 
   private final ApplicationEventPublisher publisher;
@@ -77,17 +85,18 @@ public class DataDistributerLoop extends AbstractStateLoop<StandardStates> {
   private void pushEvents(StateData stateData) {
     ObjectMapper mapper = new ObjectMapper();
     try {
-      template.convertAndSend("/topic/global",
+      template.convertAndSend(TOPIC_GLOBAL,
           mapper.writeValueAsString(stateData.getGlobalState()));
 
       if (stateData.getEvraState() != null) {
-        template.convertAndSend("/topic/evra", mapper.writeValueAsString(stateData.getEvraState()));
+        template.convertAndSend(TOPIC_EVARA,
+            mapper.writeValueAsString(stateData.getEvraState()));
       }
       if (stateData.getCryoState() != null) {
-        template.convertAndSend("/topic/cryo", mapper.writeValueAsString(stateData.getCryoState()));
+        template.convertAndSend(TOPIC_CRYO, mapper.writeValueAsString(stateData.getCryoState()));
       }
       if (stateData.getWagoIOData() != null) {
-        template.convertAndSend("/topic/wagoIO",
+        template.convertAndSend(TOPIC_WAGO_IO,
             mapper.writeValueAsString(stateData.getWagoIOData()));
       }
     } catch (MessagingException | JsonProcessingException e) {

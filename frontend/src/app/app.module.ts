@@ -13,6 +13,7 @@ import { ButtonModule } from 'primeng/button';
 import { InplaceModule } from 'primeng/inplace';
 import { InputTextModule } from 'primeng/inputtext';
 import { AccordionModule } from 'primeng/accordion';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 import { AppComponent } from './app.component';
@@ -25,11 +26,13 @@ import { FooterErrorService } from './footer/footer-error.service';
 import { StatusService } from './services/status.service';
 import { environment } from '../environments/environment.prod';
 import { StompService, StompConfig } from '@stomp/ng2-stompjs';
+import { EvaraDebugComponent } from './evara-debug/evara-debug.component';
 
 
 const appRoutes: Routes = [
   { path: 'statusview', component: StatusViewComponent },
-  { path: 'modbusdebug', component: ModbusDebugComponent }
+  { path: 'modbusdebug', component: ModbusDebugComponent },
+  { path: 'evaradebug', component: EvaraDebugComponent },
   // { path: 'hero/:id',      component: HeroDetailComponent },
   // {
   //   path: 'heroes',
@@ -75,7 +78,8 @@ const stompConfig: StompConfig = {
     AppComponent,
     StatusViewComponent,
     ModbusDebugComponent,
-    FooterComponent
+    FooterComponent,
+    EvaraDebugComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -93,6 +97,7 @@ const stompConfig: StompConfig = {
     InplaceModule,
     InputTextModule,
     AccordionModule,
+    ProgressSpinnerModule,
   ],
   providers: [
     ModbusApiService,
