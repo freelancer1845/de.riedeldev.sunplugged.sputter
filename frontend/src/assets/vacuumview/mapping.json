@@ -1,0 +1,64 @@
+{
+    "SimpleCoilOutlets": [
+        {
+            "id": "0324c168",
+            "svgId": "cell-3f5fc188c4f296b7-5",
+            "name": "Fast Vent Valve"
+        },
+        {
+            "id": "f90ed08c",
+            "svgId": "cell-3f5fc188c4f296b7-10",
+            "name": "Slow Vent Valve"
+        },
+        {
+            "id": "7521becd",
+            "svgId": "cell-3f5fc188c4f296b7-11",
+            "name": "Fast Roughing Valve"
+        },
+        {
+            "id": "0774bae6",
+            "svgId": "cell-3f5fc188c4f296b7-12",
+            "name": "Slow Roughing Valve"
+        },
+        {
+            "id": "ac013935",
+            "svgId": "cell-b0ce11fcde538f9-5",
+            "name": "Cryo 1 Rough Valve"
+        },
+        {
+            "id": "3a231d4d",
+            "svgId": "cell-b0ce11fcde538f9-1",
+            "name": "Cryo 2 Rough Valve"
+        },
+        {
+            "id": "eb2c94c5",
+            "svgId": "cell-b0ce11fcde538f9-11",
+            "name": "Cryo 1 Purge Valve"
+        },
+        {
+            "id": "45dcff1e",
+            "svgId": "cell-b0ce11fcde538f9-7",
+            "name": "Cryo 2 Purge Valve"
+        },
+        {
+            "id": "56bf97f4",
+            "svgId": "cell-1835d5f5bbe9829f-2",
+            "name": "Full Range Gauge Isolation Valve"
+        },
+        {
+            "id": "f82c4692",
+            "svgId": "cell-1835d5f5bbe9829f-8",
+            "name": "Baratron Gauge Isolation Valve"
+        },
+        {
+            "id": "fb5b1f61",
+            "svgId": "cell-3f5fc188c4f296b7-25",
+            "name": "High Vac Valve 1"
+        },
+        {
+            "id": "3b0efaf7",
+            "svgId": "cell-3f5fc188c4f296b7-22",
+            "name": "High Vac Valve 2"
+        }
+    ]
+}
