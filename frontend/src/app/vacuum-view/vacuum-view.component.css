@@ -1,11 +1,18 @@
 .openoutlet path {
-    fill: green;
+    fill: rgba(144, 255, 110, 0.555);
 }
 
 .closedoutlet path {
-    fill: red;
+    fill: rgba(255, 77, 64, 0.685);
 }
 
 .undefinedoutlet path {
     fill: orange;
+}
+
+.cryoon path {
+    fill: rgba(36, 155, 252, 0.555);
+}
+.cryooff path {
+    fill: rgba(46, 46, 46, 0.295);
 }

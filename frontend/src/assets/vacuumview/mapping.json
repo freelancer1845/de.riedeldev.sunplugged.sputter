@@ -60,5 +60,47 @@
             "svgId": "cell-3f5fc188c4f296b7-22",
             "name": "High Vac Valve 2"
         }
-    ]
+    ],
+    "PressureSites":[
+        {
+            "name": "fullRangeGauge",
+            "svgId": "cell-408b0b97b8c3187c-43"
+        }
+    ],
+    "CryoStateSites": {
+        "temp": [
+            {
+                "name": "cryo1Temp",
+                "svgId": "cell-408b0b97b8c3187c-51"
+            },
+            {
+                "name": "cryo2Temp",
+                "svgId": "cell-408b0b97b8c3187c-49"
+            }
+        ],
+        "compressor": [
+            {
+                "name": "cryo1CompressorOn",
+                "svgId": "cell-3f5fc188c4f296b7-31"
+            },
+            {
+                "name": "cryo2CompressorOn",
+                "svgId": "cell-3f5fc188c4f296b7-48"
+            },
+            {
+                "name": "compressorStarted",
+                "svgId": "cell-408b0b97b8c3187c-21"
+            }
+        ],
+        "heater": [
+            {
+                "name": "purgeHeaterOne",
+                "svgId": "cell-408b0b97b8c3187c-32"
+            },
+            {
+                "name": "purgeHeaterTwo",
+                "svgId": "cell-408b0b97b8c3187c-27"
+            }
+        ]
+    }
 }
