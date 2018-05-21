@@ -7,26 +7,26 @@ import lombok.Setter;
 @Setter
 public class CryoState {
 
-	private Boolean compressorStarted;
+  private Boolean compressorStarted;
 
-	private Boolean cryo1CompressorOn;
+  private Boolean cryo1CompressorOn;
 
-	private Boolean cryo2CompressorOn;
+  private Boolean cryo2CompressorOn;
 
-	private Double cryo1Temp;
+  private Double cryo1Temp;
 
-	private Double cryo2Temp;
+  private Double cryo2Temp;
 
-	private Boolean roughValveOne;
+  private Boolean roughValveOne;
 
-	private Boolean roughValveTwo;
+  private Boolean roughValveTwo;
 
-	private Boolean purgeValveOne;
+  private Boolean purgeValveOne;
 
-	private Boolean purgeValveTwo;
+  private Boolean purgeValveTwo;
 
-	private Boolean purgeHeaterOne;
+  private Boolean purgeHeaterOne;
 
-	private Boolean purgeHeaterTwo;
+  private Boolean purgeHeaterTwo;
 
 }

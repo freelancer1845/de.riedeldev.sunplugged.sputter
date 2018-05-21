@@ -13,6 +13,7 @@ import de.riedeldev.sunplugged.sputter.backend.devices.Devices;
 import de.riedeldev.sunplugged.sputter.backend.evra.EvraState;
 import de.riedeldev.sunplugged.sputter.backend.model.CryoState;
 import de.riedeldev.sunplugged.sputter.backend.model.GlobalState;
+import de.riedeldev.sunplugged.sputter.backend.model.PressureMesState;
 import de.riedeldev.sunplugged.sputter.backend.model.StateData;
 import de.riedeldev.sunplugged.sputter.backend.model.ValveState;
 import de.riedeldev.sunplugged.sputter.backend.model.WagoIOData;
@@ -33,6 +34,8 @@ public class DataDistributerLoop extends AbstractStateLoop<StandardStates> {
   private static final String TOPIC_EVARA = "/topic/evara";
 
   private static final String TOPIC_VALVES = "/topic/valves";
+
+  private static final String TOPIC_PRESSURE = "/topic/pressure";
 
   private final DataDistriubterConfiguration config;
 
@@ -69,6 +72,7 @@ public class DataDistributerLoop extends AbstractStateLoop<StandardStates> {
     fillCryoState(stateData.getCryoState());
     fillEvraState(stateData.getEvraState());
     stateData.setValveState(new ValveState(devices));
+    stateData.setPressureMesState(new PressureMesState(devices));
 
     StateDataEvent event = new StateDataEvent(stateData);
     publisher.publishEvent(event);
@@ -104,6 +108,10 @@ public class DataDistributerLoop extends AbstractStateLoop<StandardStates> {
       if (stateData.getValveState() != null) {
         template.convertAndSend(TOPIC_VALVES, mapper.writeValueAsString(stateData.getValveState()));
       }
+      if (stateData.getPressureMesState() != null) {
+        template.convertAndSend(TOPIC_PRESSURE,
+            mapper.writeValueAsString(stateData.getPressureMesState()));
+      }
     } catch (MessagingException | JsonProcessingException e) {
       log.error("Error sending push data.", e);
     }
@@ -124,6 +132,8 @@ public class DataDistributerLoop extends AbstractStateLoop<StandardStates> {
   }
 
   private void fillCryoState(CryoState cryoState) {
+
+    cryoState.setCompressorStarted(devices.getCompressor().isCompressorStarted());
     cryoState.setCryo1CompressorOn(devices.getCompressor().isCryo1());
     cryoState.setCryo2CompressorOn(devices.getCompressor().isCryo2());
 

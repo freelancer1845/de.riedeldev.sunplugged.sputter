@@ -4,17 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import de.riedeldev.sunplugged.sputter.backend.core.UniqueDevice;
 import de.riedeldev.sunplugged.sputter.backend.model.modbus.Coil;
+import de.riedeldev.sunplugged.sputter.backend.model.modbus.DiscreteInput;
 import de.riedeldev.sunplugged.sputter.backend.services.WagoIOService;
 
 @Component
 public class Compressor implements UniqueDevice {
 
-  private static final String ID = "g859dlf6";
+  private static final String COMPRESSOR_STARTED_ID = "a9345007";
 
   private static final String CRYO_1_COIL = "eb7809ac";
 
   private static final String CRYO_2_COIL = "2c6b0987";
 
+
+  private DiscreteInput compressorStartedInput;
 
   private Coil cryo1Coil;
 
@@ -22,6 +25,7 @@ public class Compressor implements UniqueDevice {
 
   @Autowired
   public Compressor(WagoIOService wago) {
+    this.compressorStartedInput = wago.getDiscreteInputById(COMPRESSOR_STARTED_ID);
     this.cryo1Coil = wago.getCoilById(CRYO_1_COIL);
     this.cryo2Coil = wago.getCoilById(CRYO_2_COIL);
   }
@@ -51,9 +55,13 @@ public class Compressor implements UniqueDevice {
     return cryo2Coil.getState();
   }
 
+  public boolean isCompressorStarted() {
+    return compressorStartedInput.getState();
+  }
+
   @Override
   public String getId() {
-    return ID;
+    return COMPRESSOR_STARTED_ID;
   }
 
 }

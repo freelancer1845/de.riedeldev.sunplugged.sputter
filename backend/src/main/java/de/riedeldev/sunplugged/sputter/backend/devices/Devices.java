@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import de.riedeldev.sunplugged.sputter.backend.devices.sensors.Cryo1TempSensor;
 import de.riedeldev.sunplugged.sputter.backend.devices.sensors.Cryo2TempSensor;
+import de.riedeldev.sunplugged.sputter.backend.devices.sensors.FullRangeGaugeSensor;
 import de.riedeldev.sunplugged.sputter.backend.devices.valves.BaratonGaugeIsolationValve;
 import de.riedeldev.sunplugged.sputter.backend.devices.valves.Cryo1PurgingValve;
 import de.riedeldev.sunplugged.sputter.backend.devices.valves.Cryo1RoughingValve;
@@ -84,5 +85,9 @@ public class Devices {
 
   @Autowired
   private FullRangeGaugeIsolationValve fullRangeGaugeIsolationValve;
+
+  @Autowired
+  private FullRangeGaugeSensor fullRangeGaugeSensor;
+
 
 }

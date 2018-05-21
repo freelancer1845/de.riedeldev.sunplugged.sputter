@@ -14,7 +14,11 @@ public class StateData {
 
   private PowerSourceState powerSourceState = new PowerSourceState();
 
-  private PressureMesState pressureMesState = new PressureMesState();
+  private PressureMesState pressureMesState;
+
+  public void setPressureMesState(PressureMesState pressureMesState) {
+    this.pressureMesState = pressureMesState;
+  }
 
   private CryoState cryoState = new CryoState();
 
