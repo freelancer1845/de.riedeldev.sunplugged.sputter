@@ -8,18 +8,24 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StateData {
 
-	private GlobalState globalState = new GlobalState();
+  private GlobalState globalState = new GlobalState();
 
-	private ShutterState shutterState = new ShutterState();
+  private ShutterState shutterState = new ShutterState();
 
-	private PowerSourceState powerSourceState = new PowerSourceState();
+  private PowerSourceState powerSourceState = new PowerSourceState();
 
-	private PressureMesState pressureMesState = new PressureMesState();
+  private PressureMesState pressureMesState = new PressureMesState();
 
-	private CryoState cryoState = new CryoState();
+  private CryoState cryoState = new CryoState();
 
-	private WagoIOData wagoIOData = new WagoIOData();
+  private WagoIOData wagoIOData = new WagoIOData();
 
-	private EvraState evraState = new EvraState();
+  private EvraState evraState = new EvraState();
+
+  private ValveState valveState;
+
+  public void setValveState(ValveState valveState) {
+    this.valveState = valveState;
+  }
 
 }

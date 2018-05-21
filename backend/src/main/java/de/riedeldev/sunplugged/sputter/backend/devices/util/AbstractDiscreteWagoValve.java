@@ -1,32 +1,35 @@
 package de.riedeldev.sunplugged.sputter.backend.devices.util;
 
-import de.riedeldev.sunplugged.sputter.backend.services.WagoIOService;
-import de.riedeldev.sunplugged.sputter.backend.services.WagoIOService.DO;
+import de.riedeldev.sunplugged.sputter.backend.model.modbus.Coil;
 
 public abstract class AbstractDiscreteWagoValve implements DiscreteValve {
 
-	private WagoIOService wago;
+  private final Coil coil;
 
-	private final DO digitalOutput;
+  public AbstractDiscreteWagoValve(Coil coil) {
+    this.coil = coil;
+  }
 
-	public AbstractDiscreteWagoValve(WagoIOService wago, DO digitalOutput) {
-		this.wago = wago;
-		this.digitalOutput = digitalOutput;
-	}
+  @Override
+  public void open() {
+    coil.setState(true);
+  }
 
-	@Override
-	public void open() {
-		wago.setDO(digitalOutput, true);
-	}
+  @Override
+  public void close() {
+    coil.setState(false);
+  }
 
-	@Override
-	public void close() {
-		wago.setDO(digitalOutput, false);
-	}
+  @Override
+  public boolean isOpen() {
+    return coil.getState();
+  }
 
-	@Override
-	public boolean isOpen() {
-		return wago.readDO(digitalOutput);
-	}
+  @Override
+  public String getId() {
+    return coil.getId();
+  }
+
+
 
 }

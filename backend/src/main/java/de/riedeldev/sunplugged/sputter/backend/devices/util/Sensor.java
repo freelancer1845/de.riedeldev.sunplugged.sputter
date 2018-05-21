@@ -1,7 +1,9 @@
 package de.riedeldev.sunplugged.sputter.backend.devices.util;
 
-public interface Sensor {
+import de.riedeldev.sunplugged.sputter.backend.core.UniqueDevice;
 
-	public double getValue();
+public interface Sensor extends UniqueDevice {
+
+  public double getValue();
 
 }

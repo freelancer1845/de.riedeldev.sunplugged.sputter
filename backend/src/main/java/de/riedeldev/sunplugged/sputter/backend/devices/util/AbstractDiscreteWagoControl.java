@@ -1,32 +1,34 @@
 package de.riedeldev.sunplugged.sputter.backend.devices.util;
 
-import de.riedeldev.sunplugged.sputter.backend.services.WagoIOService;
-import de.riedeldev.sunplugged.sputter.backend.services.WagoIOService.DO;
+import de.riedeldev.sunplugged.sputter.backend.model.modbus.Coil;
 
 public abstract class AbstractDiscreteWagoControl implements DiscreteControl {
 
-	private WagoIOService wago;
 
-	private final DO digitalOutput;
+  private final Coil coil;
 
-	public AbstractDiscreteWagoControl(WagoIOService wago, DO digitalOutput) {
-		this.digitalOutput = digitalOutput;
-		this.wago = wago;
-	}
+  public AbstractDiscreteWagoControl(Coil coil) {
+    this.coil = coil;
+  }
 
-	@Override
-	public void on() {
-		wago.setDO(digitalOutput, true);
+  @Override
+  public void on() {
+    coil.setState(true);
 
-	}
+  }
 
-	@Override
-	public void off() {
-		wago.setDO(digitalOutput, false);
-	}
+  @Override
+  public void off() {
+    coil.setState(false);
+  }
 
-	@Override
-	public boolean isOn() {
-		return wago.readDO(digitalOutput);
-	}
+  @Override
+  public boolean isOn() {
+    return coil.getState();
+  }
+
+  @Override
+  public String getId() {
+    return coil.getId();
+  }
 }

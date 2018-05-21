@@ -1,11 +1,13 @@
 package de.riedeldev.sunplugged.sputter.backend.devices.util;
 
-public interface DiscreteValve {
+import de.riedeldev.sunplugged.sputter.backend.core.UniqueDevice;
 
-	public void open();
+public interface DiscreteValve extends UniqueDevice {
 
-	public void close();
+  public void open();
 
-	public boolean isOpen();
+  public void close();
+
+  public boolean isOpen();
 
 }

@@ -5,3 +5,7 @@
 .closedoutlet path {
     fill: red;
 }
+
+.undefinedoutlet path {
+    fill: orange;
+}

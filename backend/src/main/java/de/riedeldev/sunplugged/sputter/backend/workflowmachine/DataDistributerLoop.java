@@ -14,6 +14,7 @@ import de.riedeldev.sunplugged.sputter.backend.evra.EvraState;
 import de.riedeldev.sunplugged.sputter.backend.model.CryoState;
 import de.riedeldev.sunplugged.sputter.backend.model.GlobalState;
 import de.riedeldev.sunplugged.sputter.backend.model.StateData;
+import de.riedeldev.sunplugged.sputter.backend.model.ValveState;
 import de.riedeldev.sunplugged.sputter.backend.model.WagoIOData;
 import de.riedeldev.sunplugged.sputter.backend.utils.AbstractStateLoop;
 import de.riedeldev.sunplugged.sputter.backend.utils.StandardStates;
@@ -30,6 +31,8 @@ public class DataDistributerLoop extends AbstractStateLoop<StandardStates> {
   private static final String TOPIC_GLOBAL = "/topic/global";
 
   private static final String TOPIC_EVARA = "/topic/evara";
+
+  private static final String TOPIC_VALVES = "/topic/valves";
 
   private final DataDistriubterConfiguration config;
 
@@ -65,6 +68,7 @@ public class DataDistributerLoop extends AbstractStateLoop<StandardStates> {
     fillWagoIOData(stateData.getWagoIOData());
     fillCryoState(stateData.getCryoState());
     fillEvraState(stateData.getEvraState());
+    stateData.setValveState(new ValveState(devices));
 
     StateDataEvent event = new StateDataEvent(stateData);
     publisher.publishEvent(event);
@@ -85,12 +89,10 @@ public class DataDistributerLoop extends AbstractStateLoop<StandardStates> {
   private void pushEvents(StateData stateData) {
     ObjectMapper mapper = new ObjectMapper();
     try {
-      template.convertAndSend(TOPIC_GLOBAL,
-          mapper.writeValueAsString(stateData.getGlobalState()));
+      template.convertAndSend(TOPIC_GLOBAL, mapper.writeValueAsString(stateData.getGlobalState()));
 
       if (stateData.getEvraState() != null) {
-        template.convertAndSend(TOPIC_EVARA,
-            mapper.writeValueAsString(stateData.getEvraState()));
+        template.convertAndSend(TOPIC_EVARA, mapper.writeValueAsString(stateData.getEvraState()));
       }
       if (stateData.getCryoState() != null) {
         template.convertAndSend(TOPIC_CRYO, mapper.writeValueAsString(stateData.getCryoState()));
@@ -98,6 +100,9 @@ public class DataDistributerLoop extends AbstractStateLoop<StandardStates> {
       if (stateData.getWagoIOData() != null) {
         template.convertAndSend(TOPIC_WAGO_IO,
             mapper.writeValueAsString(stateData.getWagoIOData()));
+      }
+      if (stateData.getValveState() != null) {
+        template.convertAndSend(TOPIC_VALVES, mapper.writeValueAsString(stateData.getValveState()));
       }
     } catch (MessagingException | JsonProcessingException e) {
       log.error("Error sending push data.", e);

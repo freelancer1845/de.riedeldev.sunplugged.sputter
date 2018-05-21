@@ -37,7 +37,7 @@ public class WagoIOServiceImpl extends AbstractStateLoop<StandardStates> impleme
   public WagoIOServiceImpl(WagoConfiguration config) {
     this.ip = config.getIp();
     this.port = config.getPort();
-    initDataArrays();
+
     this.start = config.isStart();
     setTickRate(config.getTickrate());
   }
@@ -63,6 +63,7 @@ public class WagoIOServiceImpl extends AbstractStateLoop<StandardStates> impleme
   public void init() throws IOException {
 
     readWagoConfiguration();
+    initDataArrays();
     setThreadName("Wago Modbus");
     setState(StandardStates.INIT);
     Map<StandardStates, Callable<StandardStates>> states = getStates();
@@ -159,132 +160,30 @@ public class WagoIOServiceImpl extends AbstractStateLoop<StandardStates> impleme
 
   }
 
-  @Override
-  public boolean readDO(DO digitalOutput) {
-    try {
-      lock.lock();
-      return coils[digitalOutput.getAddress()];
-    } finally {
-      lock.unlock();
-    }
-
-  }
-
-  @Override
-  public boolean readDI(DI di) {
-    try {
-      lock.lock();
-      return discreteCoils[di.getAddress()];
-    } finally {
-      lock.unlock();
-    }
-
-  }
-
-  @Override
-  public void setDO(DO digitalOutput, boolean value) {
-    try {
-      lock.lock();
-      coils[digitalOutput.getAddress()] = value;
-    } finally {
-      lock.unlock();
-    }
-
-  }
-
-  @Override
-  public Integer readAI(AI ai) {
-    try {
-      lock.lock();
-      return inputRegisters[ai.getAddress()];
-    } finally {
-      lock.unlock();
-    }
-
-  }
-
-  @Override
-  public Integer readAO(AO ao) {
-    try {
-      lock.lock();
-      return holdingRegisters[ao.getAddress()];
-    } finally {
-      lock.unlock();
-    }
-
-  }
-
-  @Override
-  public void setAO(AO ao, Integer value) {
-    try {
-      lock.lock();
-      holdingRegisters[ao.getAddress()] = value;
-    } finally {
-      lock.unlock();
-    }
-
-  }
 
   private void initDataArrays() {
-    coils = new boolean[DO.maxAddress() + 1];
-    discreteCoils = new boolean[DI.maxAddress() + 1];
-    holdingRegisters = new int[AO.maxAddress() + 1];
-    inputRegisters = new int[AI.maxAddress() + 1];
+    coils =
+        new boolean[wagoConfig.getCoils().stream().mapToInt(Coil::getAddress).max().getAsInt() + 1];
+    discreteCoils = new boolean[wagoConfig.getDiscreteInputs()
+                                          .stream()
+                                          .mapToInt(DiscreteInput::getAddress)
+                                          .max()
+                                          .getAsInt()
+        + 1];
+    holdingRegisters = new int[wagoConfig.getHoldingRegisters()
+                                         .stream()
+                                         .mapToInt(HoldingRegister::getAddress)
+                                         .max()
+                                         .getAsInt()
+        + 1];
+    inputRegisters = new int[wagoConfig.getInputRegisters()
+                                       .stream()
+                                       .mapToInt(InputRegister::getAddress)
+                                       .max()
+                                       .getAsInt()
+        + 1];
   }
 
-  // @Override
-  // public List<Boolean> getCoils() {
-  // List<Boolean> coils;
-  // try {
-  // lock.lock();
-  // coils = IntStream.range(0, this.coils.length).mapToObj(idx ->
-  // this.coils[idx]).collect(Collectors.toList());
-  // return coils;
-  // } finally {
-  // lock.unlock();
-  // }
-  //
-  // }
-  //
-  // @Override
-  // public List<Boolean> getDiscreteInputs() {
-  // List<Boolean> discreteCoils;
-  // try {
-  // lock.lock();
-  // discreteCoils = IntStream.range(0, this.discreteCoils.length).mapToObj(idx ->
-  // this.discreteCoils[idx])
-  // .collect(Collectors.toList());
-  // return discreteCoils;
-  // } finally {
-  // lock.unlock();
-  // }
-  // }
-  //
-  // @Override
-  // public List<Integer> getHoldingRegisters() {
-  // List<Integer> holdingRegisters;
-  // try {
-  // lock.lock();
-  // holdingRegisters =
-  // Arrays.stream(this.holdingRegisters).boxed().collect(Collectors.toList());
-  // return holdingRegisters;
-  // } finally {
-  // lock.unlock();
-  // }
-  // }
-  //
-  // @Override
-  // public List<Integer> getInputRegisters() {
-  // List<Integer> inputRegisters;
-  // try {
-  // lock.lock();
-  // inputRegisters =
-  // Arrays.stream(this.inputRegisters).boxed().collect(Collectors.toList());
-  // return inputRegisters;
-  // } finally {
-  // lock.unlock();
-  // }
-  // }
 
   @Override
   public boolean isOk() {
@@ -330,6 +229,38 @@ public class WagoIOServiceImpl extends AbstractStateLoop<StandardStates> impleme
     } finally {
       lock.unlock();
     }
+  }
+
+  @Override
+  public Coil getCoilById(String id) {
+    return wagoConfig.getCoils().stream().filter(coil -> coil.getId().equals(id)).findFirst().get();
+  }
+
+  @Override
+  public DiscreteInput getDiscreteInputById(String id) {
+    return wagoConfig.getDiscreteInputs()
+                     .stream()
+                     .filter(input -> input.getId().equals(id))
+                     .findFirst()
+                     .get();
+  }
+
+  @Override
+  public HoldingRegister getHoldingRegisterById(String id) {
+    return wagoConfig.getHoldingRegisters()
+                     .stream()
+                     .filter(reg -> reg.getId().equals(id))
+                     .findFirst()
+                     .get();
+  }
+
+  @Override
+  public InputRegister getInputRegisterById(String id) {
+    return wagoConfig.getInputRegisters()
+                     .stream()
+                     .filter(reg -> reg.getId().equals(id))
+                     .findFirst()
+                     .get();
   }
 
 }

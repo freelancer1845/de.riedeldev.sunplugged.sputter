@@ -1,10 +1,12 @@
 package de.riedeldev.sunplugged.sputter.backend.devices.util;
 
-public interface DiscreteControl {
+import de.riedeldev.sunplugged.sputter.backend.core.UniqueDevice;
 
-	public void on();
+public interface DiscreteControl extends UniqueDevice {
 
-	public void off();
+  public void on();
 
-	public boolean isOn();
+  public void off();
+
+  public boolean isOn();
 }

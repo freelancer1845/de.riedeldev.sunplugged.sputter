@@ -2,42 +2,58 @@ package de.riedeldev.sunplugged.sputter.backend.devices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import de.riedeldev.sunplugged.sputter.backend.core.UniqueDevice;
+import de.riedeldev.sunplugged.sputter.backend.model.modbus.Coil;
 import de.riedeldev.sunplugged.sputter.backend.services.WagoIOService;
-import de.riedeldev.sunplugged.sputter.backend.services.WagoIOService.DO;
 
 @Component
-public class Compressor {
+public class Compressor implements UniqueDevice {
 
-	private final WagoIOService wago;
+  private static final String ID = "g859dlf6";
 
-	@Autowired
-	public Compressor(WagoIOService wago) {
-		this.wago = wago;
-	}
+  private static final String CRYO_1_COIL = "eb7809ac";
 
-	public void startCryo1() {
-		wago.setDO(DO.COMPRESSOR1_CRYO1_START, true);
-	}
+  private static final String CRYO_2_COIL = "2c6b0987";
 
-	public void stopCryo1() {
-		wago.setDO(DO.COMPRESSOR1_CRYO1_START, false);
-	}
 
-	public void startCryo2() {
-		wago.setDO(DO.COMPRESSOR1_CRYO2_START, true);
-	}
+  private Coil cryo1Coil;
 
-	public void stopCryo2() {
-		wago.setDO(DO.COMPRESSOR1_CRYO2_START, false);
-	}
+  private Coil cryo2Coil;
 
-	public boolean isCryo1() {
-		return wago.readDO(DO.COMPRESSOR1_CRYO1_START);
-	}
+  @Autowired
+  public Compressor(WagoIOService wago) {
+    this.cryo1Coil = wago.getCoilById(CRYO_1_COIL);
+    this.cryo2Coil = wago.getCoilById(CRYO_2_COIL);
+  }
 
-	public boolean isCryo2() {
-		return wago.readDO(DO.COMPRESSOR1_CRYO2_START);
-	}
+  public void startCryo1() {
+    cryo1Coil.setState(true);
+  }
+
+  public void stopCryo1() {
+    cryo1Coil.setState(false);
+
+  }
+
+  public void startCryo2() {
+    cryo2Coil.setState(true);
+  }
+
+  public void stopCryo2() {
+    cryo2Coil.setState(false);
+  }
+
+  public boolean isCryo1() {
+    return cryo1Coil.getState();
+  }
+
+  public boolean isCryo2() {
+    return cryo2Coil.getState();
+  }
+
+  @Override
+  public String getId() {
+    return ID;
+  }
 
 }
