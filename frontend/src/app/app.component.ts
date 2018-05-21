@@ -18,7 +18,7 @@ export class AppComponent {
             {label: 'Status', icon: 'fa-bar-chart', routerLink: ['statusview']},
             {label: 'Modbus Debug', icon: 'fa-calendar', routerLink: ['modbusdebug']},
             {label: 'Evara Debug', icon: 'fa-caret-square-right', routerLink: ['evaradebug']},
-            {label: 'Support', icon: 'fa-support'},
+            {label: 'Vacuum View', icon: 'fa-support', routerLink: ['vacuumview']},
             {label: 'Social', icon: 'fa-twitter'}
         ];
     }

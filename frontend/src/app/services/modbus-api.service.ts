@@ -4,13 +4,25 @@ import { environment } from '../../environments/environment.prod';
 import { Observable } from 'rxjs';
 import { DigitalModbus } from '../model/digitalModbus';
 import { ModbusRegister } from '../model/modbusRegister';
+import { WagoIOState } from '../model/wagoIOState';
+import { StompService } from '@stomp/ng2-stompjs';
+import { Message } from 'stompjs';
 
 @Injectable()
 export class ModbusApiService {
 
   private api_url = environment.server_api + 'modbus/';
 
-  constructor(private http: HttpClient) { }
+  private stateObservable: Observable<WagoIOState>;
+
+  constructor(private http: HttpClient, private socket: StompService) { 
+    this.stateObservable = this.socket.subscribe('/topic/wagoIO').map((message: Message) => <WagoIOState> JSON.parse(message.body));
+  }
+
+  subscribe(next: (state: WagoIOState) => void) {
+    console.log('Subscribed');
+    this.stateObservable.subscribe(next);
+  }
 
   setCoil(coil: DigitalModbus): Observable<any> {
 

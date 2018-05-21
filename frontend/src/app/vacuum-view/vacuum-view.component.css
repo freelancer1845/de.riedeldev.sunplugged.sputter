@@ -1,0 +1,7 @@
+.openoutlet path {
+    fill: green;
+}
+
+.closedoutlet path {
+    fill: red;
+}

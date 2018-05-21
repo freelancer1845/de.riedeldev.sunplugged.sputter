@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { InlineSVGModule } from 'ng-inline-svg';
 
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
@@ -27,12 +28,14 @@ import { StatusService } from './services/status.service';
 import { environment } from '../environments/environment.prod';
 import { StompService, StompConfig } from '@stomp/ng2-stompjs';
 import { EvaraDebugComponent } from './evara-debug/evara-debug.component';
+import { VacuumViewComponent } from './vacuum-view/vacuum-view.component';
 
 
 const appRoutes: Routes = [
   { path: 'statusview', component: StatusViewComponent },
   { path: 'modbusdebug', component: ModbusDebugComponent },
   { path: 'evaradebug', component: EvaraDebugComponent },
+  { path: 'vacuumview', component: VacuumViewComponent}
   // { path: 'hero/:id',      component: HeroDetailComponent },
   // {
   //   path: 'heroes',
@@ -79,7 +82,8 @@ const stompConfig: StompConfig = {
     StatusViewComponent,
     ModbusDebugComponent,
     FooterComponent,
-    EvaraDebugComponent
+    EvaraDebugComponent,
+    VacuumViewComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -98,6 +102,7 @@ const stompConfig: StompConfig = {
     InputTextModule,
     AccordionModule,
     ProgressSpinnerModule,
+    InlineSVGModule
   ],
   providers: [
     ModbusApiService,
